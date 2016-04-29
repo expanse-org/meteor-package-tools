@@ -1,5 +1,5 @@
 // Price ticker
-EthTools.ticker = new Mongo.Collection('ethereum_price_ticker', {connection: null});
+EthTools.ticker = new Mongo.Collection('expanse_price_ticker', {connection: null});
 if(Meteor.isClient)
     new PersistentMinimongo(EthTools.ticker);
 
@@ -28,10 +28,10 @@ var updatePrice = function(e, res){
 };
 
 // update right away
-HTTP.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR', updatePrice);
+HTTP.get('https://min-api.cryptocompare.com/data/price?fsym=EXP&tsyms=BTC,USD,EUR', updatePrice);
     
 
 // update prices
 Meteor.setInterval(function(){
-    HTTP.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR', updatePrice);    
+    HTTP.get('https://min-api.cryptocompare.com/data/price?fsym=EXP&tsyms=BTC,USD,EUR', updatePrice);    
 }, 1000 * 30);

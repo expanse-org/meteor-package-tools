@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'ethereum:tools',
+  name: 'expanse:tools',
   summary: 'Helper functions for dapps',
   version: '0.5.2',
-  git: 'http://github.com/ethereum/meteor-package-tools'
+  git: 'http://github.com/expanse-org/meteor-package-tools'
 });
 
 Package.onUse(function(api) {
