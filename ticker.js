@@ -1,7 +1,7 @@
 // Price ticker
-EthTools.ticker = new Mongo.Collection('expanse_price_ticker', {connection: null});
+ExpTools.ticker = new Mongo.Collection('expanse_price_ticker', {connection: null});
 if(Meteor.isClient)
-    new PersistentMinimongo(EthTools.ticker);
+    new PersistentMinimongo(ExpTools.ticker);
 
 var updatePrice = function(e, res){
 
@@ -14,7 +14,7 @@ var updatePrice = function(e, res){
 
                 // make sure its a number and nothing else!
                 if(_.isFinite(price)) {
-                    EthTools.ticker.upsert(name, {$set: {
+                    ExpTools.ticker.upsert(name, {$set: {
                         price: String(price),
                         timestamp: null
                     }});

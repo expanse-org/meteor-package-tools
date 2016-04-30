@@ -1,6 +1,6 @@
 Package.describe({
   name: 'expanse:tools',
-  summary: 'Helper functions for dapps',
+  summary: 'Helper functions for (expanse) dapps',
   version: '0.5.2',
   git: 'http://github.com/expanse-org/meteor-package-tools'
 });
@@ -22,10 +22,10 @@ Package.onUse(function(api) {
   api.use('frozeman:persistent-minimongo@0.1.8', 'client');
   api.use('frozeman:storage@0.1.8', 'client');
 
-  api.export(['EthTools'], ['client', 'server']);
+  api.export(['ExpTools'], ['client', 'server']);
 
 
-  api.addFiles('ethtools.js', ['client', 'server']);
+  api.addFiles('ExpTools.js', ['client', 'server']);
   api.addFiles('ticker.js', ['client', 'server']);
 
   api.addFiles('globalHelpers.js', 'client');
@@ -33,7 +33,7 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('ethereum:tools');
-  api.addFiles('ethtools-tests.js', ['client', 'server']);
+  api.use('expanse:tools');
+  api.addFiles('ExpTools-tests.js', ['client', 'server']);
 });
 
