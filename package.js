@@ -25,7 +25,7 @@ Package.onUse(function(api) {
   api.export(['ExpTools'], ['client', 'server']);
 
 
-  api.addFiles('ExpTools.js', ['client', 'server']);
+  api.addFiles('exptools.js', ['client', 'server']);
   api.addFiles('ticker.js', ['client', 'server']);
 
   api.addFiles('globalHelpers.js', 'client');
@@ -34,6 +34,6 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('expanse:tools');
-  api.addFiles('ExpTools-tests.js', ['client', 'server']);
+  api.addFiles('exptools-tests.js', ['client', 'server']);
 });
 
