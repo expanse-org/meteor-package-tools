@@ -1,4 +1,4 @@
-# Expanse fork of Ethereum tools 
+# Expanse Tools 
 
 This project is based on [Ethereum Tools](https://github.com/ethereum/meteor-package-tools) and has been modified to use expanse values.
 

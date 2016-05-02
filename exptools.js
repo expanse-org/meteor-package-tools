@@ -87,7 +87,7 @@ if(isMeteorPackage) {
     /**
     Sets the default unit used by all ExpTools functions, if no unit is provided.
 
-        ExpTools.setUnit('ether')
+        ExpTools.setUnit('expanse')
 
     @method setUnit
     @param {String} unit the unit like 'expanse', or 'eur'
@@ -114,7 +114,7 @@ if(isMeteorPackage) {
         ExpTools.getUnit()
 
     @method getUnit
-    @return {String} unit the unit like 'ether', or 'eur'
+    @return {String} unit the unit like 'expanse', or 'eur'
     **/
     ExpTools.getUnit = function(){
         return LocalStore.get('dapp_expUnit');
@@ -233,7 +233,7 @@ ExpTools.formatBalance = function(number, format, unit){
     if(typeof ExpTools.ticker !== 'undefined' && supportedCurrencies(unit)) {
         var ticker = ExpTools.ticker.findOne(unit, {fields: {price: 1}});
 
-        // convert first to ether
+        // convert first to expanse (temporarily ether until web3 update)
         number = web3.fromWei(number, 'ether');
 
         // then times the currency
