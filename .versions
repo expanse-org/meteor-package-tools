@@ -21,8 +21,8 @@ diff-sequence@1.0.5
 ecmascript@0.4.3
 ecmascript-runtime@0.2.10
 ejson@1.0.11
-ethereum:web3@0.15.3
-expanse:tools@0.5.2
+expanse:web3@0.15.3
+expanse:tools@0.5.4
 frozeman:persistent-minimongo@0.1.8
 frozeman:storage@0.1.9
 geojson-utils@1.0.8

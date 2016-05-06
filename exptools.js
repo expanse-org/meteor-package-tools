@@ -72,7 +72,7 @@ var getUnit = function(unit){
 
 
 /**
-Helper functions for ethereum dapps
+Helper functions for expanse and ethereum dapps
 
 @class ExpTools
 @constructor
@@ -233,8 +233,8 @@ ExpTools.formatBalance = function(number, format, unit){
     if(typeof ExpTools.ticker !== 'undefined' && supportedCurrencies(unit)) {
         var ticker = ExpTools.ticker.findOne(unit, {fields: {price: 1}});
 
-        // convert first to expanse (temporarily ether until web3 update)
-        number = web3.fromWei(number, 'ether');
+        // convert first to expanse
+        number = web3.fromWei(number, 'expanse');
 
         // then times the currency
         if(ticker) {
@@ -263,7 +263,7 @@ ExpTools.formatBalance = function(number, format, unit){
 
 
 /**
-Formats any of the supported currency to ethereum wei.
+Formats any of the supported currency to expanse wei.
 
     ExpTools.toWei(myNumber, unit)
 
@@ -281,8 +281,8 @@ ExpTools.toWei = function(number, unit){
     if(typeof ExpTools.ticker !== 'undefined' && supportedCurrencies(unit)) {
         var ticker = ExpTools.ticker.findOne(unit, {fields: {price: 1}});
 
-        // convert first to ether
-        number = web3.toWei(number, 'ether');
+        // convert first to expanse
+        number = web3.toWei(number, 'expanse');
 
         // then times the currency
         if(ticker) {
@@ -297,12 +297,9 @@ ExpTools.toWei = function(number, unit){
         }
 
     } else {
-		if(unit.toLowerCase()=="expanse") //temporary hack until new web3 update
-			number = web3.toWei(number, 'ether');
-		else
 	        number = web3.toWei(number, unit.toLowerCase());
-
     }
 
     return number;
 };
+EthTools=ExpTools;

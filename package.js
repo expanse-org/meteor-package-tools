@@ -1,7 +1,7 @@
 Package.describe({
   name: 'expanse:tools',
   summary: 'Helper functions for (expanse) dapps',
-  version: '0.5.2',
+  version: '0.5.4',
   git: 'http://github.com/expanse-org/meteor-package-tools'
 });
 
@@ -18,12 +18,13 @@ Package.onUse(function(api) {
   //api.use('numeral:numeral@1.5.3', ['client', 'server']);
   api.use('3stack:bignumber@2.0.0', 'client');
 
-  api.use('ethereum:web3@0.15.1', ['client', 'server']);
+  api.use('expanse:web3@0.15.1', ['client', 'server']);
   api.use('frozeman:persistent-minimongo@0.1.8', 'client');
   api.use('frozeman:storage@0.1.8', 'client');
 
+  // Temporary Cross Compatibility Solution
   api.export(['ExpTools'], ['client', 'server']);
-
+  api.export(['EthTools'], ['client', 'server']);
 
   api.addFiles('exptools.js', ['client', 'server']);
   api.addFiles('ticker.js', ['client', 'server']);
