@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'expanse:tools',
+  name: 'exp:tools',
   summary: 'Helper functions for dapps',
   version: '0.7.0',
   git: 'http://github.com/expanse-org/meteor-package-tools'
