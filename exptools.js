@@ -6,9 +6,9 @@ Template Controllers
 
 
 /**
-Helper functions for expanse dapps
+Helper functions for ethereum dapps
 
-@class [packages] expanse:tools
+@class [packages] ethereum:tools
 @constructor
 */
 
@@ -46,7 +46,9 @@ Check for supported currencies
 var supportedCurrencies = function(unit){
     return (unit === 'usd' ||
            unit === 'eur' ||
-           unit === 'btc');
+           unit === 'btc' ||
+           unit === 'gbp' ||
+           unit === 'brl');
 };
 
 /**
@@ -62,7 +64,7 @@ var getUnit = function(unit){
 
         if(!unit) {
             unit = 'expanse';
-            LocalStore.set('dapp_expUnit', unit);        
+            LocalStore.set('dapp_expUnit', unit);
         }
     }
 
@@ -72,7 +74,7 @@ var getUnit = function(unit){
 
 
 /**
-Helper functions for expanse and ethereum dapps
+Helper functions for ethereum dapps
 
 @class ExpTools
 @constructor
@@ -87,7 +89,7 @@ if(isMeteorPackage) {
     /**
     Sets the default unit used by all ExpTools functions, if no unit is provided.
 
-        ExpTools.setUnit('expanse')
+        ExpTools.setUnit('ether')
 
     @method setUnit
     @param {String} unit the unit like 'expanse', or 'eur'
@@ -114,7 +116,7 @@ if(isMeteorPackage) {
         ExpTools.getUnit()
 
     @method getUnit
-    @return {String} unit the unit like 'expanse', or 'eur'
+    @return {String} unit the unit like 'ether', or 'eur'
     **/
     ExpTools.getUnit = function(){
         return LocalStore.get('dapp_expUnit');
@@ -196,11 +198,11 @@ ExpTools.formatNumber = function(number, format){
         var afterDecimal = number.replace(beforeDecimal, '').substr(0, length);
         var afterDecimalOptional = number.replace(beforeDecimal, '').substr(length, optionalLength).replace(/0*$/,'');
         beforeDecimal = beforeDecimal.replace(options.decimalSeparator, '');
-        
+
         return (!afterDecimal && !afterDecimalOptional)
             ? beforeDecimal
             : beforeDecimal + options.decimalSeparator + afterDecimal + afterDecimalOptional;
-    
+
     // otherwise simply return the formated number
     } else {
         return number;
@@ -227,14 +229,14 @@ ExpTools.formatBalance = function(number, format, unit){
         format = null;
 
     format = format || '0,0.[00000000]';
-    
+
     unit = getUnit(unit);
 
     if(typeof ExpTools.ticker !== 'undefined' && supportedCurrencies(unit)) {
         var ticker = ExpTools.ticker.findOne(unit, {fields: {price: 1}});
 
-        // convert first to expanse
-        number = web3.fromWei(number, 'expanse');
+        // convert first to ether
+        number = web3.fromWei(number, 'ether');
 
         // then times the currency
         if(ticker) {
@@ -263,7 +265,7 @@ ExpTools.formatBalance = function(number, format, unit){
 
 
 /**
-Formats any of the supported currency to expanse wei.
+Formats any of the supported currency to ethereum wei.
 
     ExpTools.toWei(myNumber, unit)
 
@@ -281,8 +283,8 @@ ExpTools.toWei = function(number, unit){
     if(typeof ExpTools.ticker !== 'undefined' && supportedCurrencies(unit)) {
         var ticker = ExpTools.ticker.findOne(unit, {fields: {price: 1}});
 
-        // convert first to expanse
-        number = web3.toWei(number, 'expanse');
+        // convert first to ether
+        number = web3.toWei(number, 'ether');
 
         // then times the currency
         if(ticker) {
@@ -297,9 +299,9 @@ ExpTools.toWei = function(number, unit){
         }
 
     } else {
-	        number = web3.toWei(number, unit.toLowerCase());
+        number = web3.toWei(number, unit.toLowerCase());
+
     }
 
     return number;
 };
-EthTools=ExpTools;

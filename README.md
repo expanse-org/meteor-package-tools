@@ -1,8 +1,6 @@
-# Expanse Tools 
+# Ethereum tools
 
-This project is based on [Ethereum Tools](https://github.com/ethereum/meteor-package-tools) and has been modified to use expanse values.
-
-A set of helper functions for expanse dapps.
+A set of helper functions for ethereum dapps.
 
 See here for a [demo of the template helpers](http://localhost:4000/#tools).
 
@@ -10,26 +8,40 @@ See here for a [demo of the template helpers](http://localhost:4000/#tools).
 
 You can either add it as a Meteor package using:
 
-    $ Meteor add expanse:tools
+    $ Meteor add ethereum:tools
 
-or add link to the `exptools.js` in your HTML.
+or add link to the `ExpTools.js` in your HTML.
 
 
 ## Usage
 
 This package provides formating and converting functionality.
 
-When using this package as a Meteor package it will call the [cryptocompare.com public API](https://min-api.cryptocompare.com/data/price?fsym=EXP&tsyms=BTC,USD,EUR) every 30s to retrive price information for expanse.
+When using the `ExpTools.ticker` it will call the [cryptocompare.com public API](https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR) every 30s to retrive price information for ether.
+When used as a Meteor package, the following units are possible for some methods:
+
+    - `btc`
+    - `usd`
+    - `eur`
+    - `cad`
+    - `gbp`
+    - `jpy`
+    - And all ether units ('ether', 'finney', 'wei', etc)
+
+**Note** As non-meteor package you can only use the ether units.
 
 ***
 
 ### ExpTools.ticker
 
+    ExpTools.ticker.start();
     ExpTools.ticker.findOne(unit)
 
 **Note** This is only available when used as a Meteor package.
 
-It gives you the latest price for expanse based on the [cryptocompare.com public API](https://min-api.cryptocompare.com/data/price?fsym=EXP&tsyms=BTC,USD,EUR).
+To start polling for ticker prices run `ExpTools.ticker.start()`
+
+It gives you the latest price for ether based on the [kraken.com public API](https://api.kraken.com/0/public/Ticker?pair=XETHZEUR,XXBTZUSD).
 `ExpTools.ticker` is a reactive collection, so when used in a reactive function it will re-run this function when the price is updated.
 
 The ticker will be updated every 30 seconds.
@@ -38,6 +50,7 @@ The ticker will be updated every 30 seconds.
 
 Its a normal Meteor collection
 
+- `start(options)` - starts the polling for the ticker, the options object can be an object with `{extraParams: 'mydata'}` to be added to the ticker polling call
 - `findOne(unit)` - returns an object with the price of the unit
 - `find().fetch()` - returns all available price ticker units
 
@@ -95,7 +108,7 @@ ExpTools.formatNumber(2000, '0,0.00');
 Reactivly sets a unit used as default unit, when no unit is passed to other ExpTools methods.
 And also persists it in localstorage so its the same when you reload you app.
 
-Default is unit `expanse`.
+Default is unit `ether`.
 
 **Parameters**
 
@@ -127,7 +140,7 @@ Tracker.autorun(function(){
 Reactivly gets the current set default unit, used byt other ExpTools methods when no unit was passed.
 And also persists it in localstorage so its the same when you reload you app.
 
-Default is unit `exp`.
+Default is unit `ether`.
 
 
 **Parameters**
@@ -189,9 +202,9 @@ var finney = ExpTools.formatNumber(2000, '0,0.00');
 
     ExpTools.formatBalance(wei, format, unit)
 
-Formats a number of wei into any other expanse unit and other currencies (see [Usage](#usage)).
+Formats a number of wei into any other ethereum unit and other currencies (see [Usage](#usage)).
 
-Default is unit `exp`.
+Default is unit `ether`.
 
 The `format` property follows the [numeral.js](http://numeraljs.com) formatting, e.g. `"0,0.00[0000]"`.
 Additionally you can add `"unit"` or `"UNIT"` (for uppercase) to display the unit after or before the number the number.
@@ -220,12 +233,12 @@ var amount = ExpTools.formatBalance(112345676543212345, '0,0.0[00] unit', 'finne
 
 #### Format balances template helper
 
-![format balances](https://raw.githubusercontent.com/expanse-org/meteor-package-elements/master/screenshots/formatBalance.png)
+![format balances](https://raw.githubusercontent.com/ethereum/meteor-package-elements/master/screenshots/formatBalance.png)
 
 **Usage**
 
 ```html
-{{dapp_formatBalance "1000000133" "0,0.00[0000]" "expanse"}}
+{{dapp_formatBalance "1000000133" "0,0.00[0000]" "ether"}}
 ```
 
 If you leave the last value it will use `ExpTools.getUnit()`, as reactive localstorage variable.
@@ -244,7 +257,7 @@ Use then `ExpTools.setUnit(finney')` to change the unit and displayed balances.
 
 Formats an amount of any supported unit (see [Usage](#usage)) into wei.
 
-Default is unit `expanse`.
+Default is unit `ether`.
 
 Additionally this function uses the reactive `ExpTools.getUnit()` variable, when no `unit` was given.
 You can then reactivly change the unit using `ExpTools.setUnit('finney')`

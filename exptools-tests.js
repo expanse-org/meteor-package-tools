@@ -27,10 +27,10 @@ Tinytest.add('ExpTools.formatNumber', function (test) {
 
 Tinytest.add('ExpTools.formatBalance', function (test) {
 
-    // default to expanse
+    // default to ether
     if(Meteor.isClient)
         ExpTools.setUnit('expanse');
-    test.equal(ExpTools.formatBalance('1000000000000000000', '0,0.0[00] unit'), "1.0 expanse");
+    test.equal(ExpTools.formatBalance('1000000000000000000', '0,0.0[00] unit'), "1.0 ether");
 
     // default to finney
     if(Meteor.isClient) {
