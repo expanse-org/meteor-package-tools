@@ -22,7 +22,7 @@ ecmascript@0.4.3
 ecmascript-runtime@0.2.10
 ejson@1.0.11
 expanse:web3@0.15.3
-expanse:tools@0.5.4
+exp:tools@0.7.0
 frozeman:persistent-minimongo@0.1.8
 frozeman:storage@0.1.9
 geojson-utils@1.0.8
