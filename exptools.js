@@ -299,7 +299,13 @@ ExpTools.toWei = function(number, unit){
         }
 
     } else {
+
+      if(uint.toLowerCase() == "expanse"){
+        number = web3.toWei(number, "ether");
+      }else{
         number = web3.toWei(number, unit.toLowerCase());
+      }
+
 
     }
 
