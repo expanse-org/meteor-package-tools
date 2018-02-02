@@ -101,7 +101,13 @@ if(isMeteorPackage) {
             return true;
         } else {
             try {
-                web3.toWei(1, unit);
+              
+                if(unit.toLowerCase() == "expanse"){
+                  web3.toWei(1, "ether");
+                }else{
+                  web3.toWei(1, unit);
+                }
+
                 LocalStore.set('dapp_expUnit', unit);
                 return true;
             } catch(e) {
@@ -249,7 +255,13 @@ ExpTools.formatBalance = function(number, format, unit){
         }
 
     } else {
+
+      if(unit.toLowerCase() == "expanse"){
+        number = web3.fromWei(number, "ether");
+      }else{
         number = web3.fromWei(number, unit.toLowerCase());
+      }
+
     }
 
     var isUppercase = (format.indexOf('UNIT') !== -1);
@@ -300,7 +312,7 @@ ExpTools.toWei = function(number, unit){
 
     } else {
 
-      if(uint.toLowerCase() == "expanse"){
+      if(unit.toLowerCase() == "expanse"){
         number = web3.toWei(number, "ether");
       }else{
         number = web3.toWei(number, unit.toLowerCase());
